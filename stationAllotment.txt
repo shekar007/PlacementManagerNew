@@ -1,0 +1,4 @@
+Jio,7.5,CS;EEE;ENI;ECEChandu;Nishant
+Google,8.5,CS;EEE;ENI;ECEPoorvansh
+Meta,9.0,CS;ECO+CS;EEE
+OYO,5.0,CS;ECE;ENI

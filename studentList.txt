@@ -1,0 +1,4 @@
+Poorvansh,10.0,20202314,ECE,ooo,Google;Meta,Google,
+Chandu,9.8,20212541,CS,oop;dsa;dbms,Jio;Google;Meta,Jio,
+Nishant,9.0,20212312,EEE,OOP;DSA;DMBS,Jio;Google;Meta,Jio,
+SampleName,8.0,20212548,ECE,OOP;DSA;M3,Google;Meta,
