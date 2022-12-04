@@ -1,4 +1,10 @@
-Chandu,9.8,20212541,CS,oop;dsa;dbms,Jio;Google;Meta,abcd
-Nishant,9,20212312,EEE,OOP;DSA;DMBS,Jio;Google;Meta,abcde
-Poorvansh,10,20202314,ECE,ooo,Google;Meta,acdfe
-SampleName,8,20212548,ECE,OOP;DSA;M3,Google;Meta,acdasdffe
+Chandu,9.8,20212541,CS,OOP;DSA;DBMS,Jio;Google;Meta,abcd
+Nishant,9,20212312,MATH+EEE,,Jio;Google;Meta;Buffer,abcde
+Poorvansh,10,20202314,ECE,DSA;DOD,Google;Meta;Buffer,acdfe
+SampleName,8,20212548,ECE,OOP;DSA;M3,Google;Meta;Buffer,acdasdffe
+Alex,9.7,20201654,CE,OOP;DSA;DRCS;DM,Jio;Google;Meta;OYO;Microsoft;Buffer,pass
+Mayawati,9.5,20196548,MANU,OOP;DSA;DBMS;MOS,Google;Meta;OYO;Alphabet;Amazon;Buffer,pass
+Qabool,8,20200025,CHE,OOP;DBMS,Google;Meta;OYO;Alphabet;Amazon;Buffer,pass
+Preet,3,20190365,CE,OOP;DBMS,Google;Meta;OYO;Alphabet;Amazon;Buffer,pass
+Devika,6.2,20201658,CS,OOP;DSA;OS;DBMS,Google;Meta;OYO;Microsoft;Buffer,pass
+Gowri,3.5,2018984,ECO+CS,OS;DM;OOP,Jio;Google;Meta;Buffer,pass

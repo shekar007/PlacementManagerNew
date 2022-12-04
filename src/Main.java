@@ -1,32 +1,36 @@
 import Admin.Admin;
-import Branches.FD;
+import MultiThreading.MultiThreadStation;
+import MultiThreading.MultiThreadStudent;
+import MultiThreading.WelcomeThread;
 import Station.Station;
 import Student.Student;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.*;
-import java.rmi.StubNotFoundException;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import static Admin.Admin.admin;
 import static Student.Student.StudentCred;
 
 public class Main {
-//homepage pe quit
 
-    public static void main(String[] args) throws IOException {
-        Station.readStation();
-        Student.readStudent();
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+
+        WelcomeThread t = new WelcomeThread();
+        t.start();
+        MultiThreadStation obj1 = new MultiThreadStation();
+        MultiThreadStudent obj2 = new MultiThreadStudent();
+        obj1.start();
+        obj2.start();
+        Thread.currentThread().sleep(7000);
+
+
+
         Scanner sc = new Scanner(System.in);
         char choice;
         char c = 0;
         while(c != 'Q') {
             System.out.println("HOMEPAGE");
             System.out.println("Welcome to Placement Manager Program :) ");
-
-
             System.out.println("Enter S to Login/Register as Student");
             System.out.println("Enter A to access as Admin");
             System.out.println("Enter Q to quit");
@@ -65,6 +69,7 @@ public class Main {
                     } else
                     {
                         System.out.println("Wrong input");
+                        break;
                     }
                 }
             } else if (c == 'A') {

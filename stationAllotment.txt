@@ -1,4 +1,9 @@
-Jio,7.5,CS;EEE;ENI;ECEChandu;Nishant
-Google,8.5,CS;EEE;ENI;ECEPoorvansh
+Ambani,6.0,EEE;ECE;ENI
+Google,8.5,CS;EEE;ENI;ECEChandu
 Meta,9.0,CS;ECO+CS;EEE
-OYO,5.0,CS;ECE;ENI
+OYO,5.0,CS;ECE;ENIDevika
+Apple,8.0,CS;EEE;MANU;CE
+Microsoft,9.0,ECE;EEE;CS
+Alphabet,8.5,CS;EEE;ECE;ENI
+Amazon,8.0,CS;EEE
+Buffer,2.0,CS;EEE;MANU;ECO+CSMayawati;Gowri

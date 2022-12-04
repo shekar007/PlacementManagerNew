@@ -6,8 +6,11 @@ import Student.Branch;
 import Student.Student;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Station {
 
     public static ArrayList<Station> stations = new ArrayList<Station>();
@@ -15,7 +18,7 @@ public class Station {
     public double CGCrtieria;
     ArrayList<Branch> branchesallowed;
     int vacancy;
-
+    public ArrayList<String> compSub = new ArrayList<>();
     public ArrayList<Student> stationMeStudents = new ArrayList<Student>();
 
 
@@ -58,8 +61,12 @@ public class Station {
                 branchArrayList.add(b);
             }
             int vac = Integer.parseInt(str[3]);
-
-            s = new Station(name, cg, branchArrayList, vac);
+            String[] arr1 = str[4].split(";");
+            ArrayList<String> arr2 = new ArrayList<>();
+            for (int i = 0; i < arr1.length; i++) {
+                arr2.add(arr1[i]);
+            }
+            s = new Station(name, cg, branchArrayList, vac,arr2);
 
         }
         br.close();
@@ -144,11 +151,13 @@ public class Station {
         this.branchesallowed = branchesallowed;
     }
 
-    public Station(String name, double CGCrtieria, ArrayList<Branch> b, int vacancy) {
+
+    public Station(String name, double CGCrtieria, ArrayList<Branch> b, int vacancy, ArrayList<String> compSub) {
         this.name = name;
         this.CGCrtieria = CGCrtieria;
         branchesallowed = b;
         this.vacancy = vacancy;
+        this.compSub=compSub;
         stations.add(this);
     }
 
@@ -168,35 +177,20 @@ public class Station {
         this.CGCrtieria = CGCrtieria;
     }
 
-    public static void outputStationList() {
-        // display station list to student in student menu
-    }
 
-
-//    public String getLocation() {
-//        return location;
+    //    private void removeStation(Station s) {
+//        boolean remove = stations.remove(s);
+//        if (!remove) {
+//            System.out.println("Station doesn't exist");
+//        } else {
+//            System.out.println("Station removed.");
+//        }
+//        //stations.txt remove also
 //    }
-
-//    public void setLocation(String location) {
-//        this.location = location;
-//    }
-
-    private void removeStation(Station s) {
-        boolean remove = stations.remove(s);
-        if (!remove) {
-            System.out.println("Station doesn't exist");
-        } else {
-            System.out.println("Station removed.");
-        }
-        //stations.txt remove also
-    }
-    public static boolean checkForNullObjects()
-    {
-        if(stations==null)
-        {
+    public static boolean checkForNullObjects() {
+        if (stations == null) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }

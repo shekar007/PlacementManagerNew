@@ -5,12 +5,15 @@ import Station.Station;
 import Student.Student;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
 import Student.Branch;
 import Station.Station;
+
+import javax.swing.*;
 
 import static Student.Branch.branchDetector;
 
@@ -28,57 +31,102 @@ public final class Admin {
     private static String password = "admin";
     public static boolean startedRound = false;
 
+    public static void removeStation()
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter station name: ");
+        String str = sc.nextLine().trim();
 
-    static boolean editStation() {
+        for (int i = 0; i < Station.stations.size(); i++) {
+            if(str.equals(Station.stations.get(i).getName()))
+            {
+            Station s = Station.stations.get(i);
+            Station.stations.remove(s);
+                System.out.println("removed");
+                break;
+            }
+            if(i==Station.stations.size())
+            {
+                System.out.println("No such station exists");
+            }
+
+
+        }
+    }
+
+    static void  editStation() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter name of station-");
         String stationname = sc.nextLine();
-
-        System.out.println("Enter N to edit station name-");
-        System.out.println("Enter C to edit CG Criteria-");
-        System.out.println("Enter B to edit Branch Criteria-");
-        char choice = sc.nextLine().charAt(0);
-
         int i = 0;
         for (i = 0; i < Station.stations.size(); i++) {
             if (Station.stations.get(i).getName().equals(stationname)) {
                 break;
             }
         }
-        //String name=s.getName();
-//        Station s4 = Station.stations.get(i);
-//    for(i=0;i<Station.stations.size();i++){
-//      if(Station.stations.get(i).getName().equals(name)){
-//        break;
-//      }
-//    }
-        if (choice == 'N') {
-            // Get name
-            System.out.println("Enter new name of station: ");
+        if (i == Station.stations.size()) {
+            System.out.println("Invalid station name "+stationname);
+        } else {
+            System.out.println("Enter N to edit station name-");
+            System.out.println("Enter C to edit CG Criteria-");
+            System.out.println("Enter B to edit Branch Criteria-");
+            char choice = sc.nextLine().charAt(0);
 
-            String newname = sc.nextLine();
-            Station.stations.get(i).setName(newname);
-            return true;
-        } else if (choice == 'C') {
 
-            int newcg = sc.nextInt();
-            Station.stations.get(i).setCGCrtieria(newcg);
-            return true;
-        } else if (choice == 'B') {
-            Scanner N3 = new Scanner(System.in);
-            System.out.println("Enter the number of branch satisfying criteria");
-            int num = sc.nextInt();
-            ArrayList<Branch> newbranch = new ArrayList<Branch>();
-            for (int j = 1; i <= num; i++) {
-                System.out.println("Enter branch: ");
-                String s1 = sc.nextLine();
-                newbranch.add(branchDetector(s1));
+            if (choice == 'N') {
+                // Get name
+                System.out.println("Enter new name of station: ");
+
+                String newname = sc.nextLine();
+                Station.stations.get(i).setName(newname);
+                System.out.println("Changed");
+
+            } else if (choice == 'C') {
+
+
+                System.out.println("Enter New Minimum Criteria: ");
+                try {
+                    double newcg = Double.parseDouble(sc.nextLine().trim());
+                    if(Student.checkValidCGPA(newcg)) {
+                        Station.stations.get(i).setCGCrtieria(newcg);
+                        System.out.println("Changed!");
+                    }
+                    else {
+                        System.out.println("Not Valid cgpa");
+                    }
+                }
+                catch (Exception err)
+                {
+                    System.out.println("Invalid input");
+                }
+
+            } else if (choice == 'B') {
+                System.out.println("Enter the number of branch satisfying criteria");
+                int num = Integer.parseInt(sc.nextLine());
+                ArrayList<Branch> newbranch = new ArrayList<Branch>();
+                int flag =0;
+                for (int j = 0; j < num; j++) {
+                    System.out.println("Enter branch: ");
+                    String s1 = sc.nextLine();
+                    try {
+                        newbranch.add(branchDetector(s1));
+                    } catch (Exception e) {
+                        System.out.println("No such branch exists");
+                        flag=1;
+                    }
+                }
+                if(flag==0) {
+                    Station.stations.get(i).setBranchesallowed(newbranch);
+
+                }else {
+                    System.out.println("Try again");
+                }
             }
-            Station.stations.get(i).setBranchesallowed(newbranch);
-            return true;
+            else {
+                System.out.println("Invalid choice");
+
+            }
         }
-        System.out.println("Invalid choice");
-        return true;
     }
 
     public static void adminLoginPage() throws IOException {
@@ -118,7 +166,7 @@ public final class Admin {
 
             } else if (c == '2') {
 
-                //removeStation();
+               Admin.removeStation();
 
             } else if (c == '3') {
                 startRound();
@@ -164,12 +212,7 @@ public final class Admin {
 
             Collections.sort(Student.students, new StudentCGComparator());
 
-            for (int i = 0; i < Student.students.size(); i++) {
-                Student s = Student.students.get(i);
 
-                System.out.println(s.getName());
-                System.out.println(s.getCgpa());
-            }
             for (int i = 0; i < Student.students.size(); i++) {
                 Student a = Student.students.get(i);
                 if (!a.alloted) {
@@ -180,13 +223,13 @@ public final class Admin {
                         if (s.requirmentsMatch(a)) {
 
                             if (s.getVacancy() > 0) {
-                                a.stationAlloted =s;
-                                System.out.println(a.getStationAlloted() +" "+ a.getName()  );
-                                a.alloted = true;
-                                s.setVacancy(s.getVacancy() - 1);
-                                s.stationMeStudents.add(a);
-                                break;
-
+                                if(a.subjectsCompleted.containsAll(s.compSub)) {
+                                    a.stationAlloted = s;
+                                    a.alloted = true;
+                                    s.setVacancy(s.getVacancy() - 1);
+                                    s.stationMeStudents.add(a);
+                                    break;
+                                }
                             } else {
 
                             }
@@ -196,6 +239,7 @@ public final class Admin {
                     }
                 }
             }
+            System.out.println("Round DONE");
 
             Student.writeStudent();
             Station.writeStation();

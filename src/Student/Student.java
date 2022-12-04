@@ -9,16 +9,13 @@ import Station.Station;
 import javax.swing.text.DefaultStyledDocument;
 import java.io.*;
 import java.lang.reflect.Array;
+import java.sql.SQLOutput;
 import java.util.*;
 
-public class Student {
-    /*
-     * stationslist see
-     * preference list update
-     * allotedstation see
-     * logout option
-     */
-    ArrayList<String> subjectsCompleted;
+public class Student{
+
+
+    public ArrayList<String> subjectsCompleted;
     private double cgpa;
     public static ArrayList<Student> students = new ArrayList<>();
     private String BITSID;
@@ -407,6 +404,7 @@ public static void readStudent()throws IOException{
         while((newLine=br.readLine())!=null){
         String[]str=newLine.split(",");
         Student s;
+
         String name=str[0];
         String cg=str[1];
         String ID=str[2];
